@@ -1,11 +1,11 @@
 import { View } from 'react-native';
-import Home from './components/App/Home';
-import Reviews from './components/App/Reviews';
+import News from './components/News/List';
+import Reviews from './components/Review/List';
 
 const Routes = {
   HOME: {
     title: 'Metalorgie',
-    Page: Reviews,
+    Page: News,
     icon: 'stars'
   },
   BANDS: {

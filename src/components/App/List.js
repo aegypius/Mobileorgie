@@ -1,22 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ActivityIndicator, Text, View, StyleSheet, FlatList, Image } from 'react-native';
-import { Card, ListItem, Avatar } from 'react-native-material-ui';
 import { COLOR } from 'react-native-material-ui';
 import HtmlView from 'react-native-htmlview';
 import {uniqBy} from 'lodash';
-import ReviewCard from '../Review/ReviewCard';
-
-const apiEndpoint = 'http://www.metalorgie.com/api/';
-
-const fetchData = (start = 0, limit = 10) => {
-  const url = `${apiEndpoint}/review.php?start=${start}&limit=${limit}`;
-  return fetch(url)
-    .then(response => response.json())
-    // .then(response => {console.log(response); return response;})
-    .catch(error => console.error(error))
-  ;
-}
 
 const styles = StyleSheet.create({
   textContainer: {
@@ -28,11 +15,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Review extends Component {
+export default class List extends Component {
 
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
+    renderItem: PropTypes.func.isRequired,
+    fetchData: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -48,6 +37,7 @@ export default class Review extends Component {
   }
 
   fetchData() {
+    const {fetchData} = this.props;
     const {offset, limit, data} = this.state;
     this.setState({ loading: true });
     return fetchData(offset, limit)
@@ -99,6 +89,7 @@ export default class Review extends Component {
   }
 
   render() {
+    const {renderItem} = this.props;
     const {refreshing, data} = this.state;
     return (
       <View>
@@ -110,13 +101,7 @@ export default class Review extends Component {
           onRefresh={() => this.handleRefresh()}
           onEndReached={() => this.handleMore()}
           onEndReachedThreshold={5}
-          renderItem={({item}) => (
-            <ReviewCard album={{
-              cover: item.album.image || item.album.image_thumb,
-              coverThumb: item.album.image_thumb,
-              title: item.album.name
-            }}/>
-          )}
+          renderItem={renderItem}
         />
       </View>
     );

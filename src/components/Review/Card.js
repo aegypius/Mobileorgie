@@ -33,11 +33,14 @@ export default class ReviewCard extends PureComponent
 
   render() {
     const { album } = this.props;
+    console.log(album);
+
     return (
       <Card>
         {album.cover ? <Image source={{uri: album.cover }} style={{width: 350, height: 350}} resizeMode='cover'/> : null}
         <View style={styles.textContainer}>
           <Text>{album.title}</Text>
+          <Text>{album.artist}</Text>
           {/* <HtmlView value={album} RootComponent={Text} stylesheet={styles} /> */}
         </View>
       </Card>
