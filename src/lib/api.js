@@ -48,4 +48,8 @@ export const fetchNews = (start = 0, limit = 10) => {
   return Api.get(`/news.php?start=${start}&limit=${limit}`);
 };
 
+export const fetchBands = (start = 0, limit = 10) => {
+  return Api.get(`/band.php?start=${start}&limit=${limit}`);
+};
+
 export default Api;

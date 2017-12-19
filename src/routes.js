@@ -1,4 +1,5 @@
 import { View } from 'react-native';
+import {BandList} from './components/Band';
 import {NewsList} from './components/News';
 import {ReviewList} from './components/Review';
 
@@ -10,7 +11,7 @@ const Routes = {
   },
   BANDS: {
     title: 'Groupes',
-    Page: View,
+    Page: BandList,
     icon: 'group'
   },
   REVIEWS: {
