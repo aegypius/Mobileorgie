@@ -1,11 +1,11 @@
 import { View } from 'react-native';
-import News from './components/News/List';
-import Reviews from './components/Review/List';
+import {NewsList} from './components/News';
+import {ReviewList} from './components/Review';
 
 const Routes = {
   HOME: {
     title: 'Metalorgie',
-    Page: News,
+    Page: NewsList,
     icon: 'stars'
   },
   BANDS: {
@@ -15,7 +15,7 @@ const Routes = {
   },
   REVIEWS: {
     title: 'Chroniques',
-    Page: Reviews,
+    Page: ReviewList,
     icon: 'play-circle-filled'
   },
   LIVE: {

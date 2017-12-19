@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import { Card, COLOR } from 'react-native-material-ui';
 import HtmlView from 'react-native-htmlview';
+import { fetchReviews } from '../lib/api';
+import List from './App/List';
 
 const styles = StyleSheet.create({
   textContainer: {
@@ -14,7 +16,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class ReviewCard extends PureComponent
+export class ReviewCard extends PureComponent
 {
   static propTypes = {
     album: PropTypes.shape({
@@ -47,3 +49,13 @@ export default class ReviewCard extends PureComponent
     );
   }
 }
+
+export const ReviewList = () => {
+  return <List fetchData={fetchReviews} renderItem={item => (
+    <ReviewCard album={{
+      cover: item.album.image || item.album.image_thumb,
+      coverThumb: item.album.image_thumb,
+      title: item.album.name
+    }}/>
+  )}/>
+};

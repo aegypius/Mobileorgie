@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Text, View, Image, StyleSheet } from 'react-native';
 import { Card, COLOR } from 'react-native-material-ui';
 import HtmlView from 'react-native-htmlview';
+import { fetchNews } from '../lib/api';
+import List from './App/List';
 
 const styles = StyleSheet.create({
   textContainer: {
@@ -14,7 +16,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class ArticleCard extends PureComponent
+export class ArticleCard extends PureComponent
 {
   static propTypes = {
     image: PropTypes.string,
@@ -32,3 +34,11 @@ export default class ArticleCard extends PureComponent
     );
   }
 }
+
+export const NewsList = () => {
+  return (
+    <List fetchData={fetchNews} renderItem={({item}) => (
+      <ArticleCard image={item.image || null} texte={item.texte}/>
+    )} />
+  );
+};
